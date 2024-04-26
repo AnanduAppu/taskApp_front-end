@@ -3,9 +3,9 @@ import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import UserContex from '../../userContex/UserContex'
 function Mainpage() {
-    const{userData,setUserData} =  useContext(UserContex)
+    const{userData,AuthtaskData,SetauthTaskData} =  useContext(UserContex)
 
-    console.log(userData)
+   
     const [taskData, setTaskData] = useState({
         title: '',
         description: '',
@@ -29,7 +29,8 @@ function Mainpage() {
         try {
             const response = await axios.post('http://localhost:3020/user/createtask',{taskData})
             if(response.data.success){
-            
+              SetauthTaskData(response.data.Data)
+              
                 toast.success("task created")
                 setTaskData({
                     title: '',
@@ -39,8 +40,8 @@ function Mainpage() {
                   });
             }
         } catch (error) {
-            console.log("the error from task creating",error)
-            toast.error("an error occurred")
+            
+            toast.error("an error occurred task creating")
         }
        
         
@@ -169,7 +170,7 @@ function Mainpage() {
                       <div className="font-bold text-xl leading-none">
                         Total Task
                       </div>
-                      <div className="mt-2">{userData.tasks.length}</div>
+                      <div className="mt-2">{AuthtaskData.length}</div>
                     </div>
                   </div>
                 </div>

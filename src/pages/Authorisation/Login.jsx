@@ -23,20 +23,22 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
+   
     try {
         const response =  await axios.post("http://localhost:3020/user/login",{formData},{withCredentials:true})
         if(response.data.success){
-            console.log(response.data.Data)
+       
             toast.success(response.data.message)
             setUserData(response.data.Data)
             if(response.data.Data.role==="Authuser"){
                 navigate("/home");
+            }else{
+              navigate ("/userhome")
             }
             
         }
     } catch (error) {
-        console.log("an error occure when login :-",error)
+        
         toast.error("an error in login")
     }
   };

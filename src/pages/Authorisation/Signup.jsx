@@ -54,7 +54,7 @@ function Signup() {
     setErrors(newErrors);
 try {
     if (Object.keys(newErrors).length === 0) {
-        console.log("Form Submitted:", formData);
+      
         const response =  await axios.post("http://localhost:3020/user/signup",{formData})
         if(response.data.success){
             toast.success(response.data.message)
@@ -64,7 +64,7 @@ try {
       }
 } catch (error) {
     toast.error("some error occured in sign up")
-    console.log("signup error :- ", error)
+   
 }
 
   };
